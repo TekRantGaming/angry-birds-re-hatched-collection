@@ -42,7 +42,7 @@
 
 ## The trailer
 
-<i>Coming soon.</i>
+<img src="docs/images/trailer-teaser.gif" alt="A few seconds of the trailer" width="80%">
 
 </div>
 
