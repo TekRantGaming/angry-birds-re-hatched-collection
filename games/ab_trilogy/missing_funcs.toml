@@ -1,0 +1,17 @@
+# Tail-call-only entry points the analyzer did not discover (seeded from codegen errors).
+[functions]
+0x82243350 = {}
+0x82260200 = {}
+0x82306968 = {}
+0x82364AD0 = {}
+0x82478B10 = {}
+0x82478B28 = {}
+0x82478B30 = {}
+0x82478B38 = {}
+0x82478B40 = {}
+0x82478B48 = {}
+0x824E46D0 = {}
+0x82499890 = {}
+0x82499898 = {}
+0x824998A0 = {}
+0x824998A8 = {}

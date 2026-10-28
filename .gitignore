@@ -1,0 +1,24 @@
+# Angry Birds: The Re-Hatched Collection
+
+# --- Copyrighted game data: never commit ---
+assets/
+image.bin
+*.iso
+*.xex
+*.bik
+*.pak
+# Recompiled C++ is derived from the game's code; regenerate it from your own disc
+games/*/generated/
+
+# --- SDK, downloads and build output ---
+games/*/tools/rexglue/
+games/*/out/
+build/
+dist/
+
+# --- Test runs, captures, logs ---
+games/*/runs/
+games/*/test-build/
+*.log
+*.dmp
+*.map

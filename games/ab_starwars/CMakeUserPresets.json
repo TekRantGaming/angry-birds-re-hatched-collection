@@ -1,0 +1,19 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "user-env",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_PREFIX_PATH": "${sourceDir}/tools/rexglue/win-amd64",
+                "CMAKE_FIND_USE_PACKAGE_REGISTRY": "OFF"
+            }
+        },
+        { "name": "absw-release",        "inherits": ["win-amd64-release",        "user-env"] },
+        { "name": "absw-relwithdebinfo", "inherits": ["win-amd64-relwithdebinfo", "user-env"] }
+    ],
+    "buildPresets": [
+        { "name": "absw-release",        "configurePreset": "absw-release" },
+        { "name": "absw-relwithdebinfo", "configurePreset": "absw-relwithdebinfo" }
+    ]
+}
