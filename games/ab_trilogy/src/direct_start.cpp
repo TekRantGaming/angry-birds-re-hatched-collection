@@ -172,6 +172,18 @@ void Install(PPCContext& ctx, uint8_t* base, uint32_t L, const char* game) {
 
 }  // namespace
 
+// For skip_intros.cpp: runs a Lua chunk on L (false when it did not compile; it must not raise), and a global's type.
+bool RunLuaChunk(PPCContext& ctx, uint8_t* base, uint32_t L, const std::string& source) {
+  GuestCalls g(ctx, base);
+  if (g.Call(sub_825895D8, L, g.String(source)) != 0) {
+    g.Call(sub_82586CF8, L, uint32_t(-2));
+    return false;
+  }
+  g.Call(sub_825881C8, L, 0, 0, 0);
+  return true;
+}
+int32_t LuaGlobalType(PPCContext& ctx, uint8_t* base, uint32_t L, const char* name) { return Global(ctx, base, L, name); }
+
 // Buttons the direct start presses on user 0 right now (for input.cpp): Start in 0.15 s taps every 0.6 s while the title
 // waits for it (each title frame asks again; the taps end half a second after it stops).
 void TitleShown();  // skip_intros.cpp

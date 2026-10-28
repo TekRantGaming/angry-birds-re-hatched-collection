@@ -3,7 +3,7 @@ import struct, sys
 import capstone
 BASE = 0x82000000
 import os
-IMG = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'ewj', 'image.bin'), 'rb').read()
+IMG = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'image.bin'), 'rb').read()
 md = capstone.Cs(capstone.CS_ARCH_PPC, capstone.CS_MODE_32 | capstone.CS_MODE_BIG_ENDIAN)
 def u32(a): return struct.unpack('>I', IMG[a-BASE:a-BASE+4])[0]
 def dis(a, n):

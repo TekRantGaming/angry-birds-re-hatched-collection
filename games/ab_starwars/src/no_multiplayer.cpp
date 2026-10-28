@@ -31,13 +31,15 @@ std::string SceneName(const uint8_t* base, uint32_t object) {
 
 namespace absw {
 void TitleShown();  // skip_intros.cpp
+void MenuShown();   // skip_intros.cpp
 }
 
 REX_EXTERN(__imp__sub_82256830);
 REX_HOOK_RAW(sub_82256830) {
   const std::string name = SceneName(base, ctx.r3.u32);
   REXLOG_INFO("ABSW: screen {}", name);
-  if (name == "MainMenu") absw::TitleShown();  // skip_intros.cpp: the intros are over
+  if (name == "MainMenu") absw::TitleShown();     // skip_intros.cpp: the intros are over
+  if (name == "EpisodeSelection") absw::MenuShown();  // skip_intros.cpp: past the menus
   if (name == "MultiplayerPlayModeSelect") {
     static std::atomic<bool> logged{false};
     if (!logged.exchange(true)) REXLOG_INFO("ABSW: Multiplayer is not in this release; the button does nothing");
