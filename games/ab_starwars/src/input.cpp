@@ -41,7 +41,11 @@ uint16_t ButtonBits(const std::string& name) {
 
 std::vector<Press> ParseScript() {
   std::vector<Press> presses;
+#ifdef AB_DEV_TOOLS
   const char* env = std::getenv("ABSW_DEV_PAD");
+#else
+  const char* env = nullptr;  // release builds have no developer aids (CMakeLists.txt)
+#endif
   if (!env) return presses;
   std::string s = env;
   size_t pos = 0;

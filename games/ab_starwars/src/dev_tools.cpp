@@ -8,6 +8,7 @@
 //                             floats; the runtime's debug log prints it).
 //   ABSW_DEV_FIND=<text>      after ABSW_DEV_FIND_AT seconds (default 30) searches guest memory for the text and saves
 //                             64 KB around each hit (up to 40) as find_<address>.bin in the working folder.
+// Release builds leave them out: they are built only with AB_DEV_TOOLS (CMakeLists.txt).
 
 #include <algorithm>
 #include <chrono>
@@ -29,6 +30,11 @@
 #include <rex/ui/presenter.h>
 #include <rex/ui/windowed_app_context.h>
 
+#ifndef AB_DEV_TOOLS
+namespace absw {
+void StartDevTools(rex::Runtime*, rex::ui::WindowedAppContext&, uint32_t, uint32_t) {}
+}  // namespace absw
+#else
 namespace absw {
 namespace {
 
@@ -154,3 +160,4 @@ void StartDevTools(rex::Runtime* runtime, rex::ui::WindowedAppContext& app_conte
 }
 
 }  // namespace absw
+#endif  // AB_DEV_TOOLS

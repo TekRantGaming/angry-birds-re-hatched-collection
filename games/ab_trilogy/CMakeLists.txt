@@ -37,6 +37,13 @@ endif()
 
 rexglue_setup_target(ab_trilogy GPU_PLUGINS xenos)
 
+# Developer aids (src/dev_tools.cpp, ABT_DEV_PAD in src/input.cpp) are left out of release builds; configure with
+# -DAB_DEV_TOOLS=ON for testing.
+option(AB_DEV_TOOLS "Build the developer aids" OFF)
+if(AB_DEV_TOOLS)
+    target_compile_definitions(ab_trilogy PRIVATE AB_DEV_TOOLS)
+endif()
+
 if(WIN32)
     # UTF-8 as the program's code page, and a linker map for decoding crash reports.
     target_link_options(ab_trilogy PRIVATE "LINKER:/MANIFEST:EMBED" "LINKER:/MANIFESTUAC:NO"

@@ -50,11 +50,22 @@ games/ab_trilogy/              ab_trilogy.exe, rexruntime.dll, rexgpu-xenos.dll
 games/ab_starwars/             ab_starwars.exe, rexruntime.dll, rexgpu-xenos.dll
 ```
 
-The launcher installs each disc into `games/<game>/game` and writes each game's settings to `games/<game>/<game>.toml`.
+Each folder also holds the Visual C++ runtime DLLs and its update list (`update-files.txt`). The launcher installs
+each disc into `games/<game>/game` and writes each game's settings to `games/<game>/<game>.toml`. No game files are
+ever in a release.
+
+## Releases
+
+`tools/make_release.ps1 -Version X -Out <folder>` (after both games' release builds, with VERSION set to X) rebuilds
+the launcher and writes the players' zip, `AngryBirdsCollection-vX-windows-x64.zip`, for the release tagged `vX`, and
+the launcher's downloads (its own update and `AngryBirdsTrilogy-` and `AngryBirdsStarWars-vX-windows-x64.zip`) with
+`SHA256SUMS.txt` for the release tagged `packages-vX`. Create the packages release first. Pass `-Earlier` with the
+previous version so files it shipped and this one does not are retired.
 
 ## Developer aids
 
-Both games have switches for scripted tests, all off unless their environment variable is set (see each game's
+Release builds leave them out. Configure with `-DAB_DEV_TOOLS=ON` to build them. Both games then have switches for
+scripted tests, all off unless their environment variable is set (see each game's
 `src/dev_tools.cpp`, `src/input.cpp` and `tools/run.ps1`): a scripted controller, frame captures, a memory search
 and a mixer level meter. Trilogy's `tools/luadis.py` lists the game's Lua menu scripts and `tools/find_lua_regs.py`
 maps their Lua functions to the game's code.

@@ -7,6 +7,8 @@
 //                           samples pointer the game passes to XAudioSubmitRenderDriverFrame: 6 x 256 big endian floats).
 //   ABT_DEV_FIND=<text>     after ABT_DEV_FIND_AT seconds (default 30) searches guest memory for the text and saves
 //                           64 KB around each hit (up to 40) as find_<address>.bin in the working folder.
+//   ABT_DEV_IO=1            logs the files the game opens (below).
+// Release builds leave them out: they are built only with AB_DEV_TOOLS (CMakeLists.txt).
 
 #include <algorithm>
 #include <atomic>
@@ -29,6 +31,11 @@
 #include <rex/ui/presenter.h>
 #include <rex/ui/windowed_app_context.h>
 
+#ifndef AB_DEV_TOOLS
+namespace abt {
+void StartDevTools(rex::Runtime*, rex::ui::WindowedAppContext&, uint32_t, uint32_t) {}
+}  // namespace abt
+#else
 namespace abt {
 namespace {
 
@@ -204,3 +211,4 @@ REX_HOOK_RAW(sub_821C4738) {
   __imp__sub_821C4738(ctx, base);
   if (g_dev_io) REXLOG_INFO("ABT io: command line argument '{}' -> {}", GuestString(base, arg), ctx.r3.u32);
 }
+#endif  // AB_DEV_TOOLS
